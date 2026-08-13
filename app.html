@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        FitCore Workout Builder
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background-color: #edf3ef;
+
+            color: #24342d;
+        }
+
+
+        .navbar {
+
+            background-color: #102a24;
+
+            padding: 18px 20px;
+        }
+
+
+        .navbar-inner {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+
+        .brand {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 1.4rem;
+
+            letter-spacing: 2px;
+
+            font-weight: bold;
+        }
+
+
+        .navbar-links a {
+
+            color: white;
+
+            text-decoration: none;
+
+            margin-left: 20px;
+        }
+
+
+        .navbar-links a:hover {
+
+            color: #d7b56d;
+        }
+
+
+        .app-header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #102a24,
+                    #1f4b3f
+                );
+
+            color: white;
+
+            text-align: center;
+
+            padding: 75px 20px;
+        }
+
+
+        .small-title {
+
+            color: #d7b56d;
+
+            letter-spacing: 3px;
+
+            font-size: 0.8rem;
+
+            font-weight: bold;
+        }
+
+
+        .app-header h1 {
+
+            font-size: 3rem;
+
+            margin: 10px 0;
+        }
+
+
+        .app-header p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            line-height: 1.6;
+
+            color: #dce7e3;
+        }
+
+
+        .app-container {
+
+            max-width: 850px;
+
+            margin: 60px auto;
+
+            padding: 20px;
+        }
+
+
+        .builder-card {
+
+            background-color: white;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .form-group {
+
+            margin-bottom: 25px;
+        }
+
+
+        label {
+
+            display: block;
+
+            font-weight: bold;
+
+            color: #174537;
+
+            margin-bottom: 8px;
+        }
+
+
+        select,
+        input {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border:
+
+                1px solid #ccd7d2;
+
+            border-radius: 8px;
+
+            font-size: 1rem;
+
+            background-color: white;
+        }
+
+
+        button {
+
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background-color: #174537;
+
+            color: white;
+
+            font-size: 1rem;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+
+            background-color: #102a24;
+        }
+
+
+        .result {
+
+            margin-top: 35px;
+
+            display: none;
+
+            background-color: #f4f7f5;
+
+            border-left:
+
+                5px solid #d7b56d;
+
+            padding: 30px;
+
+            border-radius: 8px;
+        }
+
+
+        .result h2 {
+
+            color: #174537;
+
+            margin-top: 0;
+        }
+
+
+        .workout-summary {
+
+            color: #6b7772;
+
+            margin-bottom: 25px;
+        }
+
+
+        .exercise {
+
+            background-color: white;
+
+            padding: 18px;
+
+            margin-bottom: 12px;
+
+            border-radius: 8px;
+
+            border:
+
+                1px solid #e2e8e5;
+        }
+
+
+        .exercise strong {
+
+            color: #174537;
+        }
+
+
+        .exercise p {
+
+            margin-bottom: 0;
+
+            color: #68736f;
+        }
+
+
+        .footer {
+
+            margin-top: 60px;
+
+            background-color: #091c18;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px;
+        }
+
+
+        @media (max-width: 700px) {
+
+            .app-header h1 {
+
+                font-size: 2.2rem;
+            }
+
+
+            .builder-card {
+
+                padding: 25px;
+            }
+
+
+            .navbar-links {
+
+                margin-top: 15px;
+
+                width: 100%;
+            }
+
+
+            .navbar-links a {
+
+                margin-left: 0;
+
+                margin-right: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <div class="navbar-inner">
+
+            <a href="index.html"
+               class="brand">
+
+                FITCORE
+
+            </a>
+
+
+            <div class="navbar-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="scratch.html">
+                    Scratch Page
+                </a>
+
+                <a href="resume.html">
+                    Resume
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- HEADER -->
+
+    <header class="app-header">
+
+        <p class="small-title">
+            INTERACTIVE FITNESS APP
+        </p>
+
+        <h1>
+            Workout Builder
+        </h1>
+
+        <p>
+            Select your fitness goal, experience level,
+            and available workout time. The application
+            will create a personalized workout suggestion
+            automatically.
+        </p>
+
+    </header>
+
+
+
+    <!-- APP -->
+
+    <main class="app-container">
+
+
+        <div class="builder-card">
+
+
+            <!-- GOAL -->
+
+            <div class="form-group">
+
+                <label for="goal">
+                    What is your primary goal?
+                </label>
+
+                <select id="goal">
+
+                    <option value="strength">
+                        Build Strength
+                    </option>
+
+                    <option value="conditioning">
+                        Improve Conditioning
+                    </option>
+
+                    <option value="balanced">
+                        Balanced Fitness
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- LEVEL -->
+
+            <div class="form-group">
+
+                <label for="level">
+                    What is your fitness level?
+                </label>
+
+                <select id="level">
+
+                    <option value="beginner">
+                        Beginner
+                    </option>
+
+                    <option value="intermediate">
+                        Intermediate
+                    </option>
+
+                    <option value="advanced">
+                        Advanced
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- TIME -->
+
+            <div class="form-group">
+
+                <label for="minutes">
+                    How many minutes do you have?
+                </label>
+
+                <select id="minutes">
+
+                    <option value="20">
+                        20 minutes
+                    </option>
+
+                    <option value="30">
+                        30 minutes
+                    </option>
+
+                    <option value="45">
+                        45 minutes
+                    </option>
+
+                    <option value="60">
+                        60 minutes
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <button onclick="generateWorkout()">
+
+                Generate My Workout
+
+            </button>
+
+
+
+            <!-- RESULTS -->
+
+            <div
+                id="result"
+                class="result">
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <p>
+            FitCore Workout Builder
+        </p>
+
+        <p>
+            Created with HTML, CSS & JavaScript
+        </p>
+
+    </footer>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+
+        function generateWorkout() {
+
+
+            const goal =
+                document.getElementById("goal").value;
+
+
+            const level =
+                document.getElementById("level").value;
+
+
+            const minutes =
+                parseInt(
+                    document.getElementById("minutes").value
+                );
+
+
+            const result =
+                document.getElementById("result");
+
+
+
+            let exercises = [];
+
+
+
+            /* =====================================
+               SELECT EXERCISES BASED ON GOAL
+            ===================================== */
+
+
+            if (goal === "strength") {
+
+                exercises = [
+
+                    "Goblet Squat",
+
+                    "Push-Ups",
+
+                    "Romanian Deadlift",
+
+                    "Dumbbell Row",
+
+                    "Shoulder Press",
+
+                    "Plank"
+
+                ];
+
+            }
+
+
+            else if (goal === "conditioning") {
+
+                exercises = [
+
+                    "Jumping Jacks",
+
+                    "Bodyweight Squats",
+
+                    "Mountain Climbers",
+
+                    "Walking Lunges",
+
+                    "High Knees",
+
+                    "Plank"
+
+                ];
+
+            }
+
+
+            else {
+
+                exercises = [
+
+                    "Squats",
+
+                    "Push-Ups",
+
+                    "Dumbbell Rows",
+
+                    "Walking Lunges",
+
+                    "Mountain Climbers",
+
+                    "Plank"
+
+                ];
+
+            }
+
+
+
+            /* =====================================
+               LEVEL
+            ===================================== */
+
+
+            let sets;
+
+            let reps;
+
+
+
+            if (level === "beginner") {
+
+                sets = 2;
+
+                reps = "8–10 reps";
+
+            }
+
+
+            else if (level === "intermediate") {
+
+                sets = 3;
+
+                reps = "10–12 reps";
+
+            }
+
+
+            else {
+
+                sets = 4;
+
+                reps = "10–15 reps";
+
+            }
+
+
+
+            /* =====================================
+               NUMBER OF EXERCISES BASED ON TIME
+            ===================================== */
+
+
+            let exerciseCount;
+
+
+            if (minutes === 20) {
+
+                exerciseCount = 4;
+
+            }
+
+
+            else if (minutes === 30) {
+
+                exerciseCount = 5;
+
+            }
+
+
+            else {
+
+                exerciseCount = 6;
+
+            }
+
+
+
+            exercises =
+                exercises.slice(
+                    0,
+                    exerciseCount
+                );
+
+
+
+            /* =====================================
+               TITLE
+            ===================================== */
+
+
+            let goalName;
+
+
+            if (goal === "strength") {
+
+                goalName =
+                    "Strength Workout";
+
+            }
+
+
+            else if (goal === "conditioning") {
+
+                goalName =
+                    "Conditioning Workout";
+
+            }
+
+
+            else {
+
+                goalName =
+                    "Balanced Fitness Workout";
+
+            }
+
+
+
+            /* =====================================
+               CREATE HTML
+            ===================================== */
+
+
+            let workoutHTML = `
+
+                <h2>
+                    ${goalName}
+                </h2>
+
+                <p class="workout-summary">
+
+                    ${minutes} minutes •
+
+                    ${capitalize(level)} level
+
+                </p>
+
+            `;
+
+
+
+            exercises.forEach(
+
+                function(exercise, index) {
+
+
+                    workoutHTML += `
+
+                        <div class="exercise">
+
+                            <strong>
+
+                                ${index + 1}.
+                                ${exercise}
+
+                            </strong>
+
+                            <p>
+
+                                ${sets} sets •
+
+                                ${reps}
+
+                            </p>
+
+                        </div>
+
+                    `;
+
+                }
+
+            );
+
+
+
+            workoutHTML += `
+
+                <div class="exercise">
+
+                    <strong>
+
+                        Finish: Cool Down
+
+                    </strong>
+
+                    <p>
+
+                        Walk slowly and stretch
+                        for approximately 5 minutes.
+
+                    </p>
+
+                </div>
+
+            `;
+
+
+
+            result.innerHTML =
+                workoutHTML;
+
+
+            result.style.display =
+                "block";
+
+
+            result.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+            });
+
+
+        }
+
+
+
+        /* =====================================
+           CAPITALIZE FUNCTION
+        ===================================== */
+
+
+        function capitalize(word) {
+
+            return word.charAt(0).toUpperCase()
+                + word.slice(1);
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
